@@ -19,5 +19,5 @@
         src: "{{file_name}}"
         dest: "{{local_folder_location}}/{{file_name}}"
         provider: "{{ provider }}"
-      delegate_to: localhost
+
 
