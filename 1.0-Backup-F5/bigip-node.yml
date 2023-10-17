@@ -1,6 +1,6 @@
 ---
 - name: BIG-IP SETUP
-  hosts: lb
+  hosts: bigip-ve.hk.ntnxlab.local
   connection: local
   gather_facts: true
 
