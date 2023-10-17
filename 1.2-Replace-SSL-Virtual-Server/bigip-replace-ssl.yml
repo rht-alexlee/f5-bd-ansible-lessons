@@ -84,6 +84,7 @@
         - oneconnect
         - http
       when: '"Active" in result.stdout'
+      delegate_to: localhost40
       
     - name: SAVE RUNNING CONFIG ON BIG-IP
       f5networks.f5_modules.bigip_config:
