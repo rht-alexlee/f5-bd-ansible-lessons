@@ -50,11 +50,10 @@
         state: "present"
         name: "{{hostvars[item[0]].inventory_hostname}}"
         host: "{{hostvars[item[0]].ansible_host}}"
-        port: "{{item[1]}}"
+        port: "80"
         pool: "{{ vip_name }}_pool"
       with_nested:
         - "{{ groups['web_servers'] }}"
-        - "{{ docker_ports }}"
       when: '"Active" in result.stdout'
 
     - name: ADD VIRTUAL SERVER
