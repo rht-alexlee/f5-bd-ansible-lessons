@@ -1,11 +1,9 @@
 ---
 - name: BIG-IP SETUP
   hosts: bigip-ve.hk.ntnxlab.local
-  delegate_to: ansible-vm
   gather_facts: false
 
   tasks:
-
     - name: Setup provider
       ansible.builtin.set_fact:
         provider:
@@ -14,7 +12,8 @@
           # password: "{{ f5_admin_password }}"
           server_port: "{{ f5_admin_port }}"
           validate_certs: false
-
+      delegate_to: ansible-vm
+      
     - name: Find Active Machine
       f5networks.f5_modules.bigip_command:
         provider: "{{ provider }}"
@@ -23,7 +22,8 @@
         commands:
           - bash -c "cat /var/prompt/ps1"
       register: result
-  
+      delegate_to: ansible-vm
+      
     - debug:
         var: result.stdout
 
@@ -36,7 +36,8 @@
       when: 
       - '"Active" in result.stdout'
       - ssl_file_location is not defined
-
+      delegate_to: ansible-vm
+      
     - name: SSL key upload
       f5networks.f5_modules.bigip_ssl_key:
         provider: "{{ provider }}"
@@ -45,7 +46,8 @@
       when: 
       - '"Active" in result.stdout'
       - ssl_file_location is not defined
-
+      delegate_to: ansible-vm
+      
     - name: SSL cert upload
       f5networks.f5_modules.bigip_ssl_certificate:
         provider: "{{ provider }}"
@@ -54,7 +56,8 @@
       when: 
       - '"Active" in result.stdout'
       - ssl_file_location is defined
-
+      delegate_to: ansible-vm
+      
     - name: SSL key upload
       f5networks.f5_modules.bigip_ssl_key:
         provider: "{{ provider }}"
@@ -63,7 +66,8 @@
       when: 
       - '"Active" in result.stdout'
       - ssl_file_location is defined
-
+      delegate_to: ansible-vm
+      
     - name: Create a client SSL profile with a cert/key/chain setting
       f5networks.f5_modules.bigip_profile_client_ssl:
         provider: "{{ provider }}"
@@ -73,7 +77,8 @@
         - cert: "{{ ssl_cert[-4] }}_cert"
           key: "{{ ssl_key[-4] }}_key"
       when: '"Active" in result.stdout'
-
+      delegate_to: ansible-vm
+      
     - name: UPDATE A VIRTUAL SERVER
       f5networks.f5_modules.bigip_virtual_server:
         provider: "{{provider}}"
@@ -85,12 +90,13 @@
         - oneconnect
         - http
       when: '"Active" in result.stdout'
-
+      delegate_to: ansible-vm
 
     - name: SAVE RUNNING CONFIG ON BIG-IP
       f5networks.f5_modules.bigip_config:
         provider: "{{ provider }}"
         save: true
       when: '"Active" in result.stdout'
-
+      delegate_to: ansible-vm
+      
 # #    - name: Syncronize Hosts
