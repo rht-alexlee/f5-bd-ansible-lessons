@@ -48,12 +48,11 @@
       f5networks.f5_modules.bigip_pool_member:
         provider: "{{ provider }}"
         state: "present"
-        name: "{{hostvars[item[0]].inventory_hostname}}"
-        host: "{{hostvars[item[0]].ansible_host}}"
+        name: "{{hostvars[item].inventory_hostname}}"
+        host: "{{hostvars[item].ansible_host}}"
         port: "80"
         pool: "{{ vip_name }}_pool"
-      with_nested:
-        - "{{ groups['web_servers'] }}"
+      loop: "{{ groups['web_servers'] }}"
       when: '"Active" in result.stdout'
 
     - name: ADD VIRTUAL SERVER
