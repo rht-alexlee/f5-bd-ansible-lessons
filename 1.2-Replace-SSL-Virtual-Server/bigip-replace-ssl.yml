@@ -1,7 +1,7 @@
 ---
 - name: BIG-IP SETUP
   hosts: bigip-ve.hk.ntnxlab.local
-  connection: local
+  delegate_to: ansible-vm
   gather_facts: false
 
   tasks:
@@ -85,7 +85,7 @@
         - oneconnect
         - http
       when: '"Active" in result.stdout'
-      delegate_to: ansible-vm
+
 
     - name: SAVE RUNNING CONFIG ON BIG-IP
       f5networks.f5_modules.bigip_config:
