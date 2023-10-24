@@ -1,5 +1,5 @@
 ---
-- name: BIG-IP SETUP
+- name: Get BIG-IP Data Group List
   hosts: bigip-ve.hk.ntnxlab.local
   connection: local
   gather_facts: true
@@ -16,6 +16,6 @@
   tasks:
     - name: Get Data Group List
       f5networks.f5_modules.bigip_command:
-        commands:
-          - list ltm data-group internal {{f5_data_group_list}}
         provider: "{{ provider }}"
+        commands:
+          - list ltm data-group internal {{ f5_data_group_list }}
