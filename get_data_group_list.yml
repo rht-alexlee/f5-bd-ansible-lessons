@@ -1,0 +1,21 @@
+---
+- name: BIG-IP SETUP
+  hosts: bigip-ve.hk.ntnxlab.local
+  connection: local
+  gather_facts: true
+
+  tasks:
+    - name: Setup provider
+      ansible.builtin.set_fact:
+        provider:
+          server: "{{ ansible_host }}"
+          # user: "{{ f5_admin_user }}"
+          # password: "{{ f5_admin_password }}"
+          server_port: "{{ f5_admin_port }}"
+          validate_certs: false
+  tasks:
+    - name: Get Data Group List
+      f5networks.f5_modules.bigip_command:
+        commands:
+          - list ltm data-group internal {{f5_data_group_list}}
+        provider: "{{ provider }}"
