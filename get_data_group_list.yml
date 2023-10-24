@@ -2,7 +2,7 @@
 - name: Get BIG-IP Data Group List
   hosts: bigip-ve.hk.ntnxlab.local
   connection: local
-  gather_facts: true
+  gather_facts: false
 
   tasks:
     - name: Setup provider
@@ -13,9 +13,13 @@
           # password: "{{ f5_admin_password }}"
           server_port: "{{ f5_admin_port }}"
           validate_certs: false
-  tasks:
+          
     - name: Get Data Group List
       f5networks.f5_modules.bigip_command:
         provider: "{{ provider }}"
         commands:
           - list ltm data-group internal {{ f5_data_group_list }}
+      register: result
+
+      - debug:
+        var: result.stdout
