@@ -17,7 +17,7 @@
   tasks:
     - name: Install PKCS12 cert and key
       f5networks.f5_bigip.bigip_ssl_pkcs12:
-        name: "app-dev.cert"
-        source: "/awx/certs/baz.p12"
+        name: "app-demo"
+        source: "/awx/certs/app-demo.p12"
         cert_pass: "password"
         state: present
