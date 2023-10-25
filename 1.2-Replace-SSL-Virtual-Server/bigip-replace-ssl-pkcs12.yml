@@ -1,0 +1,23 @@
+---
+- name: BIG-IP SETUP
+  hosts: bigip-ve.hk.ntnxlab.local
+  connection: httpapi
+  gather_facts: false
+
+# Connection Info
+  vars:
+    ansible_host: "{{ ansible_host }}"
+#    ansible_user: admin
+#    ansible_httpapi_password: SuperSecret
+    ansible_httpapi_port: "{{ f5_admin_port }}"
+    ansible_network_os: f5networks.f5_bigip.bigip
+    ansible_httpapi_use_ssl: yes
+    ansible_httpapi_validate_certs: no
+
+  tasks:
+    - name: Install PKCS12 cert and key
+      f5networks.f5_bigip.bigip_ssl_pkcs12:
+        name: "app-dev.cert"
+        source: "/awx/certs/baz.p12"
+        cert_pass: "password"
+        state: present
