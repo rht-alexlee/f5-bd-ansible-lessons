@@ -37,7 +37,6 @@
           key: "app-demo"
 	  passphrase: "password"
       delegate_to: localhost
-
             
     - name: UPDATE A VIRTUAL SERVER
       f5networks.f5_modules.bigip_virtual_server:
