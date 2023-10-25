@@ -7,7 +7,6 @@
 # Connection Info
   vars:
     provider:
-      user: "admin"
       server: "{{ ansible_host }}"
       server_port: "{{ f5_admin_port }}"
       validate_certs: false
