@@ -35,7 +35,9 @@
         cert_key_chain:
         - cert: "app-demo"
           key: "app-demo"
-		      passphrase: "password"
+	  passphrase: "password"
+      delegate_to: localhost
+
             
     - name: UPDATE A VIRTUAL SERVER
       f5networks.f5_modules.bigip_virtual_server:
@@ -47,3 +49,4 @@
           context: client-side
         - oneconnect
         - http
+      delegate_to: localhost
