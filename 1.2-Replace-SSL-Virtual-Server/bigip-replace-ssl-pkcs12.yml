@@ -11,7 +11,6 @@
       server: "{{ ansible_host }}"
       server_port: "{{ f5_admin_port }}"
       validate_certs: false
-    ansible_host: "{{ ansible_host }}"
     ansible_user: "{{ provider.user }}"
     ansible_httpapi_password: "{{ provider.password }}"
     ansible_httpapi_port: "{{ provider.server_port }}"
