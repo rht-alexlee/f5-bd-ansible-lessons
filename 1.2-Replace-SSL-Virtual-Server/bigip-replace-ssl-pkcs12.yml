@@ -7,6 +7,8 @@
 # Connection Info
   vars:
     provider:
+      user: admin
+      password: "NTNX4ever/"
       server: "{{ ansible_host }}"
       server_port: "{{ f5_admin_port }}"
       validate_certs: false
