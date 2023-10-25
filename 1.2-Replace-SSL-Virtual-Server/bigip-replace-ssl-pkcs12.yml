@@ -35,7 +35,7 @@
         cert_key_chain:
         - cert: "app-demo"
           key: "app-demo"
-	  passphrase: "password"
+          passphrase: "password"
       delegate_to: localhost
             
     - name: UPDATE A VIRTUAL SERVER
