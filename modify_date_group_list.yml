@@ -23,3 +23,13 @@
 
     - debug:
         var: result.stdout
+        
+    - name: Find Active Machine
+      f5networks.f5_modules.bigip_command:
+        provider: "{{ provider }}"
+        match: "any"
+        warn: no
+        commands:
+          - bash -c "cat /var/prompt/ps1"
+      register: result
+  
