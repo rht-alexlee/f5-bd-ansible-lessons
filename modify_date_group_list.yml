@@ -32,4 +32,21 @@
         commands:
           - bash -c "cat /var/prompt/ps1"
       register: result
-  
+
+    - name: Update data grou list records
+      bigip_data_group:
+        name: {{ f5_data_group_list }}
+        internal: true
+        records:
+          - key: 172.16.66.129/32
+            value: "rhel10.hk.ntnxlab.local"
+      provider: "{{ provider }}"
+      delegate_to: localhost
+
+      - name: SAVE RUNNING CONFIG ON BIG-IP
+      f5networks.f5_modules.bigip_config:
+        provider: "{{ provider }}"
+        save: true
+      when: '"Active" in result.stdout'
+
+
