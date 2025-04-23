@@ -50,4 +50,5 @@
           context: client-side
         - oneconnect
         - http
+        - websecurity
       delegate_to: localhost
