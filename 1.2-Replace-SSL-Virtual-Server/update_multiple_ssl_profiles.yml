@@ -46,7 +46,7 @@
         profiles:
         - name: "{{ vip_name }}_ClientSSL_profile"
           context: client-side
-        - name: "clientssl-secure"
+        - name: "clientssl"
           context: client-side
         - oneconnect
         - http
