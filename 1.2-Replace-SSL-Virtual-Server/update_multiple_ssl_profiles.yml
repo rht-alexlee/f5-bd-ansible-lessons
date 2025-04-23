@@ -44,9 +44,9 @@
         name: "{{ vip_name }}"
         port: "443"
         profiles:
-        - name: "{{ vip_name }}_ClientSSL_profile"
+        - name: "{{ vip_name }}_new_ClientSSL_profile"
           context: client-side
-        - name: "clientssl"
+        - name: "{{ vip_name }}_ClientSSL_profile"
           context: client-side
         - oneconnect
         - http
