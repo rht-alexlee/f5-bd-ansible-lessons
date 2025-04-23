@@ -31,7 +31,7 @@
       f5networks.f5_modules.bigip_command:
         provider: "{{ provider }}"
         commands:
-          - create ltm profile client-ssl {{ vip_name }}_ClientSSL_profile defaults-from hkt-clientssl-template sni-default true retain-certificate false cert-key-chain add { my_profile_certkey { cert app-demo key app-demo } }
+          - create ltm profile client-ssl {{ vip_name }}_new_ClientSSL_profile defaults-from hkt-clientssl-template sni-default true retain-certificate false cert-key-chain add { my_profile_certkey { cert app-demo key app-demo } }
       register: result
       delegate_to: localhost
 
