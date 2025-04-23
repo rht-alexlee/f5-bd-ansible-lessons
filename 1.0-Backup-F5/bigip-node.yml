@@ -14,6 +14,9 @@
           server_port: "{{ f5_admin_port }}"
           validate_certs: false
 
+    - debug:
+        var: f5_admin_password
+        
     - name: Download a new UCS
       f5networks.f5_modules.bigip_ucs_fetch:
         src: "{{file_name}}"
